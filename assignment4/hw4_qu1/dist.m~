@@ -1,0 +1,8 @@
+n = size(x,2);
+d = zeros(n,n);
+for i=1:n
+  for j=(i+1):n
+    d(i,j) = sqrt(sum((x(:,i)-x(:,j)).^2));
+    d(j,i) = d(i,j);
+  end
+end

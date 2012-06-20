@@ -1,0 +1,12 @@
+Assignment 1 for Computer Vision CSCI-UA.0480-001
+Adam Krebs, Spring 2012
+
+A set of 4 Image Processing assignments written in Matlab.
+* Colorizing the Prokudin-Gorskii photo collection (combining Red, Green, and Blue channels)
+* Harris corner detector
+* Scale-invariant blob-detectors
+* Image alignment using feature detection and difference of Gaussians blob detection
+
+Original Assignment is here: http://cs.nyu.edu/~fergus/teaching/vision/assign1.pdf
+David Lowe's SIFT feature detector library is here: http://cs.ucb.ca/spider/lowe/keypoints/siftDemoV4.zip
+

@@ -1,0 +1,10 @@
+% CSCI-UA.0480-001 Assignment 4
+%
+% Part 2: Mean Shift Image Segmentation
+%
+% Adam Krebs (Spring 2012)
+
+function [colorim] = part2(fullim)
+
+
+end

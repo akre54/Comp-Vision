@@ -1,0 +1,10 @@
+% CSCI-UA.0480-001 Assignment 4
+%
+% Part 1: Boosted Object Detctor
+%
+% Adam Krebs (Spring 2012)
+
+function [colorim] = part1(fullim)
+
+
+end

@@ -1,0 +1,55 @@
+function labelme2pascal(D, databasename, HOMELMIMAGES, pascalfolder)
+%
+% HOMELMIMAGES = 'http://labelme.csail.mit.edu/Images'; 
+% pascalfolder = '/databases/'
+% databasename = 'SUN';
+%
+% labelme2pascal(D, databasename, HOMELMIMAGES, pascalfolder)
+
+Nimages = length(D);
+
+% create folders
+mkdir(
+
+
+% LOAD - RESCALE - AND WRITE IMAGES
+disp('Writing images')
+for n = 1:Nfiles
+    filename = D(n).annotation.filename;
+    filename_annotation =  strrep(filename,'.jpg','.xml');
+
+    % Load image
+    img = LMimread(D, n, HOMELMIMAGES); % Load image
+    [nrows ncols cc] = size(img);
+    
+    % Write image
+    imwrite(img, fullfile(pascalfolder, databasename, 'JPEGImages', filename), 'jpg', 'quality', 100);
+    
+    Nobjects = LMcountobject(D(n));
+    
+    % Translate annotation to pascal format
+    clear v
+    v.annotation.folder = databasename;
+    v.annotation.filename = filename;
+    v.annotation.source.database = databasename;
+    v.annotation.size.width = ncols;
+    v.annotation.size.height = nrows;
+    v.annotation.size.depth = cc;
+    v.annotation.segmented = 0;
+    
+    boundingbox = LMobjectboundingbox(D(n).annotation); % [xmin ymin xmax ymax]
+    for m = 1:Nobjects
+        v.annotation.object(n).name = D(n).annotation.object(m).name;
+        v.annotation.object(n).truncated = D(n).annotation.object(m).crop;
+        v.annotation.object(n).difficult = D(n).annotation.object(m).crop;
+        v.annotation.object(n).bndbox.xmin = boundingbox(m,1);
+        v.annotation.object(n).bndbox.ymin = boundingbox(m,2);
+        v.annotation.object(n).bndbox.xmax = boundingbox(m,3);
+        v.annotation.object(n).bndbox.ymax = boundingbox(m,4);
+    end
+
+    % Write annotation file    
+    writeXML(fullfile(pascalfolder, databasename, 'Annotations', filename_annotation), v);
+    
+    total = total+1;
+end
